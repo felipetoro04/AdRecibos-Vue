@@ -149,6 +149,7 @@ export default {
               this.receipts.push(response.data.data);
               alert("boleta Añadida")
               this.clean();
+
             })
       } else {
 
@@ -156,9 +157,11 @@ export default {
         axios.put('http://127.0.0.1:8000/api/receipts/' + this.receipt.id, this.receipt)
             .then(response => {
               this.receipts.push(response.data.data);
+              this.showCR = false
               alert("Boleta Actualizada")
             })
         this.creation = false;
+        this.clean();
 
       }
 
