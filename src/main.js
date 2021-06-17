@@ -20,7 +20,7 @@ const routes = [
   { path: '/home', component: home },
   { path: '/Registro', component: registerUser},
   { path: '/Consultas', component: inquiries},
-  { path: '/Configuracion', component: setting}
+  { path: '/Configuraciones', component: setting}
 
 ]
 
