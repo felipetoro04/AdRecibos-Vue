@@ -1,5 +1,6 @@
 <template>
   <div>
+    <barnav v-on:creacion="showCreation"/>
   <div  class="content-table" style="margin-top: 20px">
     Bienvenido : {{userEmail}}
   </div>
@@ -81,10 +82,10 @@
 
 <script>
 import axios from "axios";
+import Barnav from "@/components/barnav";
 export default {
   name: "Cuerpo",
-
-
+  components: {Barnav},
   data() {
     return {
       showCR: false,
