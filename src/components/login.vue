@@ -43,7 +43,6 @@ export default {
         password: null,
       },
 
-
     }
   },
   methods: {

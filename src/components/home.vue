@@ -1,20 +1,35 @@
 <template>
   <div id="home">
-
-
-    <Cuerpo></Cuerpo>
+    <div v-if="isLogged">
+      <Cuerpo></Cuerpo>
+    </div>
   </div>
 </template>
-
 <script>
-
-
 import Cuerpo from "@/components/body";
 export default {
   name: "home",
   components: {Cuerpo,},
+  mounted() {
+    this.checkLogin()
+  },
+  methods:{
+    checkLogin(){
+      var id = localStorage.getItem('USER_ID').trim();
+      if (id == null || id == ''){
+        this.isLogged = false;
+      }
+      else{
+        this.isLogged = true;
+      }
+    }
+  },
+  data() {
+    return {
+      isLogged: false
+    }
+  }
 }
-
 </script>
 
 <style scoped>
