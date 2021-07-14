@@ -53,16 +53,17 @@
                 {{ receipt.numberReceipt }}
               </td>
               <td>
-                {{ receipt.issueDate }}
+                {{ receipt.issueDate | formatDate}}
               </td>
               <td>
-                {{ receipt.expirationDate }}
+                {{ receipt.expirationDate | formatDate}}
               </td>
               <td>
-                {{ receipt.amountPayable }}
+                {{ receipt.amountPayable | formatNumber}}
               </td>
               <td>
                 {{obtainStatus(receipt.idStatus) }}
+
               </td>
               <td>
                 <button class="button-update"  @click="updateReceipt(receipt);showCreation()">Actualizar</button>
@@ -81,8 +82,22 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from "axios";
 import Barnav from "@/components/barnav";
+import moment from 'moment'
+
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('MM/DD/YYYY')
+  }
+})
+var numeral = require("numeral");
+
+Vue.filter("formatNumber", function (value) {
+  return numeral(value).format("1,0");
+});
+
 export default {
   name: "Cuerpo",
   components: {Barnav},
