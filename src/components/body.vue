@@ -1,82 +1,82 @@
 <template>
-  <div>
+  <div id="central">
     <barnav v-on:creacion="showCreation"/>
-  <div  class="content-table" style="margin-top: 20px">
-    Bienvenido : {{userEmail}}
-  </div>
-  <div id='Cuerpo' align="center">
-    <Header></Header>
-    <h1 v-if="hasError">API no disponible.</h1>
+    <div  class="welcome">
+      Bienvenido : {{userEmail}}
+    </div>
+    <div id='Cuerpo' align="center">
+      <Header></Header>
+      <h1 v-if="hasError">API no disponible.</h1>
 
-    <div v-else>
-      <h1 v-if="loading">Cargando Boletas...</h1>
       <div v-else>
-        <h1>Boletas</h1>
+        <h1 v-if="loading">Cargando Boletas...</h1>
+        <div v-else>
+          <h1>Boletas</h1>
 
-        <div >
-          <form class="content-data" v-show ="showCR">
-            Institucion:
-            <select v-model="receipt.idEnterprice" required>
-              <option v-for="enterprice in enterprices" v-bind:key="enterprice.id" v-bind:value="enterprice.id" >{{ enterprice.name }}</option>
-            </select>
-            Numero de Boleta:<input v-model="receipt.numberReceipt" type="text" required>
-            Fecha de Emision:<input v-model="receipt.issueDate" type="date" required>
-            Fecha de Vencimiento:<input v-model="receipt.expirationDate" type="date" required>
-            Monto a Pagar:<input v-model="receipt.amountPayable" type="int" required>
-            Estado de Boleta:
-            <select v-model="receipt.idStatus" required>
-              <option v-for="stat in status" v-bind:key="stat.id" v-bind:value="stat.id">{{ stat.name }}</option>
-            </select>
-            <button class="button-add" @click="addReceipt()">Agregar</button>
-            <button class="button-clean" @click="clean()">Limpiar</button>
-            <button class="button-clean" @click="hideCreation">Cancelar</button>
+          <div >
+            <form class="Creacion" v-show ="showCR">
+              Institucion:
+              <select v-model="receipt.idEnterprice" required>
+                <option v-for="enterprice in enterprices" v-bind:key="enterprice.id" v-bind:value="enterprice.id" >{{ enterprice.name }}</option>
+              </select>
+              Numero de Boleta:<input v-model="receipt.numberReceipt" type="text" required>
+              Fecha de Emision:<input v-model="receipt.issueDate" type="date" required>
+              Fecha de Vencimiento:<input v-model="receipt.expirationDate" type="date" required>
+              Monto a Pagar:<input v-model="receipt.amountPayable" type="int" required>
+              Estado de Boleta:
+              <select v-model="receipt.idStatus" required>
+                <option v-for="stat in status" v-bind:key="stat.id" v-bind:value="stat.id">{{ stat.name }}</option>
+              </select>
+              <button class="button-add" @click="addReceipt">Agregar</button>
+              <button class="button-clean" @click="clean()">Limpiar</button>
+              <button class="button-clean" @click="hideCreation">Cancelar</button>
 
-          </form>
-        </div>
-        <div class="content-table">
-          <table class="blueTable" >
-            <tr>
-              <th>Institucion</th>
-              <th>Numero de Boleta</th>
-              <th>Fecha de Emision</th>
-              <th>Fecha de Vencimiento</th>
-              <th>Monto de Pagar</th>
-              <th>Estado de Boleta</th>
-              <th>Acciones</th>
+            </form>
+          </div>
+          <div class="content-table">
+            <table class="blueTable" >
+              <tr>
+                <th>Institucion</th>
+                <th>Numero de Boleta</th>
+                <th>Fecha de Emision</th>
+                <th>Fecha de Vencimiento</th>
+                <th>Monto de Pagar</th>
+                <th>Estado de Boleta</th>
+                <th>Acciones</th>
 
-            </tr>
-            <tr v-for="receipt in receipts" :key="receipt.id">
-              <td>
-                {{ obtainEnterprice(receipt.idEnterprice) }}
-              </td>
-              <td>
-                {{ receipt.numberReceipt }}
-              </td>
-              <td>
-                {{ receipt.issueDate | formatDate}}
-              </td>
-              <td>
-                {{ receipt.expirationDate | formatDate}}
-              </td>
-              <td>
-                {{ receipt.amountPayable | formatNumber}}
-              </td>
-              <td>
-                {{obtainStatus(receipt.idStatus) }}
+              </tr>
+              <tr v-for="receipt in receipts" :key="receipt.id">
+                <td>
+                  {{ obtainEnterprice(receipt.idEnterprice) }}
+                </td>
+                <td>
+                  {{ receipt.numberReceipt }}
+                </td>
+                <td>
+                  {{ receipt.issueDate | formatDate}}
+                </td>
+                <td>
+                  {{ receipt.expirationDate | formatDate}}
+                </td>
+                <td>
+                  {{ receipt.amountPayable | formatNumber}}
+                </td>
+                <td>
+                  {{obtainStatus(receipt.idStatus) }}
 
-              </td>
-              <td>
-                <button class="button-update"  @click="updateReceipt(receipt);showCreation()">Actualizar</button>
-                <button class="button-delete" @click="removeReceipt(receipt.id)">Eliminar</button>
+                </td>
+                <td>
+                  <button class="button-update"  @click="updateReceipt(receipt);showCreation()">Actualizar</button>
+                  <button class="button-delete" @click="removeReceipt(receipt.id)">Eliminar</button>
 
-              </td>
-            </tr>
-          </table>
+                </td>
+              </tr>
+            </table>
 
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 
 </template>
@@ -86,18 +86,15 @@ import Vue from 'vue'
 import axios from "axios";
 import Barnav from "@/components/barnav";
 import moment from 'moment'
-
 Vue.filter('formatDate', function(value) {
   if (value) {
     return moment(String(value)).format('MM/DD/YYYY')
   }
 })
 var numeral = require("numeral");
-
 Vue.filter("formatNumber", function (value) {
   return numeral(value).format("1,0");
 });
-
 export default {
   name: "Cuerpo",
   components: {Barnav},
@@ -143,7 +140,7 @@ export default {
     };
   },
   methods: {
-  hideCreation() {
+    hideCreation() {
       this.showCR = false
     },
     showCreation() {
@@ -156,20 +153,14 @@ export default {
           });
     },
     addReceipt() {
-
       if (this.creation) {
-
-
         axios.post('http://127.0.0.1:8000/api/receipts/', this.receipt)
             .then(response => {
               this.receipts.push(response.data.data);
               alert("boleta Añadida")
               this.clean();
-
             })
       } else {
-
-
         axios.put('http://127.0.0.1:8000/api/receipts/' + this.receipt.id, this.receipt)
             .then(response => {
               this.receipts.push(response.data.data);
@@ -178,12 +169,8 @@ export default {
             })
         this.creation = false;
         this.clean();
-
       }
-
-
     },
-
     updateReceipt(receipt) {
       this.receipt = receipt;
       this.creation = false;
@@ -201,34 +188,23 @@ export default {
       this.creation = true;
     },
     obtainEnterprice(id) {
-
-
       for (const key in this.enterprices) {
         if (this.enterprices[key].id.toString() === id.toString()) {
           return this.enterprices[key].name;
         }
       }
-
       return 'No hay informacion'
-
-
       //return instituciones.filter(institucion => institucion.id === id)[0].nombre;
     },
     obtainStatus(id) {
-
       for (const key in this.status) {
         if (this.status[key].id.toString() === id.toString()) {
           return this.status[key].name;
         }
       }
-
       return 'No hay informacion'
-
     },
-
-
   },
-
   mounted() {
     axios
         .get('http://127.0.0.1:8000/api/receipts')
@@ -236,94 +212,165 @@ export default {
         // eslint-disable-next-line no-unused-vars
         .catch(error => this.hasError = true)
         .finally(() => this.loading = false)
-
     this.userEmail = localStorage.getItem('USER_EMAIL')
   }
 }
-
-
 </script>
 
 <style scoped>
+#central h1 {
+  font-family:'Quicksand', sans-serif;
 
-.content-data {
-  -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
-  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
-  border-radius: 5px;
+}
+#central .welcome {
+  font-family:'Quicksand', sans-serif;
+  margin-top: 20px;
   margin-bottom: 20px;
-  padding: 20px;
-  display: grid;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 400px;
+  margin-right: 400px;
+
+  background-image: url("https://image.freepik.com/vector-gratis/fondo-hexagonal-minimo-blanco_79603-1463.jpg");
+  border: 2px solid #ccc;
+
+ 
+  font-family:'Quicksand', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
 }
 
-.content-table{
-  -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
-  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
-  border-radius: 5px;
+#central .Creacion{
+  margin-top: 20px;
   margin-bottom: 20px;
-  padding: 20px;
-}
-
-table.blueTable {
-  border: 1px solid #1C6EA4;
-  background-color: #EEEEEE;
+  background-image: url("https://image.freepik.com/vector-gratis/fondo-abstracto-formas-blancas_79603-1362.jpg");
+  border: 2px solid #ccc;
   width: 100%;
-  text-align: left;
-  border-collapse: collapse;
+  max-width: 600px;
+  font-family:'Quicksand', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
 }
-table.blueTable td, table.blueTable th {
-  border: 1px solid #AAAAAA;
-  padding: 3px 2px;
+#central .Creacion form {
+  font-family: 'Quicksand', sans-serif;
 }
-table.blueTable tbody td {
-  font-size: 13px;
+#central .Creacion input{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+  width: 78%;
+  cursor: pointer;
+  padding: 7px 10px;
+  height: 20px;
+  outline: 0;
+
+  background: #f0f0f0;
+
+  font-size: 1em;
+  color: black;
+  font-family:
+      'Quicksand', sans-serif;
+  border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
-table.blueTable tr:nth-child(even) {
-  background: #c0bae0;
-}
-table.blueTable thead {
-  background: #1C6EA4;
-  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  border-bottom: 2px solid #444444;
-}
-table.blueTable thead th {
-  font-size: 15px;
-  font-weight: bold;
-  color: #FFFFFF;
-  border-left: 2px solid #D0E4F5;
-}
-table.blueTable thead th:first-child {
-  border-left: none;
+#central .Creacion select{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+  width: 80%;
+  cursor: pointer;
+  padding: 7px 10px;
+  height: 42px;
+  outline: 0;
+
+  background: #f0f0f0;
+  color: black;
+  font-size: 1em;
+margin-bottom: 20px;
+  margin-top: 20px;
+  font-family:'Quicksand', sans-serif;
+  border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+
 }
 
-table.blueTable tfoot {
-  font-size: 14px;
-  font-weight: bold;
-  color: #FFFFFF;
-  background: #D0E4F5;
-  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-  border-top: 2px solid #444444;
+#central .Creacion button {
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 50px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-image: url("https://www.dhresource.com/0x0/f2/albu/g9/M01/CA/F4/rBVaWF6MElqAfa4CAACDx132CXw700.jpg/blue-wallpapers-simple-modern-abstract-3d.jpg");
+  color: white;
 }
-table.blueTable tfoot td {
-  font-size: 14px;
+
+#central .Creacion button:hover {
+  opacity: 0.8;
 }
-table.blueTable tfoot .links {
-  text-align: right;
+.content-table *{
+  font-family:'Quicksand', sans-serif;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
-table.blueTable tfoot .links a{
-  display: inline-block;
-  background: #1C6EA4;
-  color: #FFFFFF;
-  padding: 2px 8px;
+.content-table {
+  margin: 10px 70px 70px;
+  box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+.blueTable{
   border-radius: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  background-color: white;
 }
+
+.blueTable td, .blueTable th {
+  text-align: center;
+  padding: 8px;
+}
+
+.blueTable td {
+  border-right: 1px solid #f8f8f8;
+  font-size: 12px;
+}
+
+.blueTable  th {
+  color: #ffffff;
+  background: #324960;
+}
+
+
+.blueTable th:nth-child(odd) {
+  color: #ffffff;
+  background: #324960;
+}
+
+.blueTable tr:nth-child(even) {
+  background: #F8F8F8;
+}
+
+
 
 .button-add{
   margin-top: 5px;

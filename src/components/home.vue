@@ -3,10 +3,15 @@
     <div v-if="isLogged">
       <Cuerpo></Cuerpo>
     </div>
+    <div v-else>
+      <router-link to="/login">A login</router-link>
+    </div>
+
   </div>
 </template>
 <script>
 import Cuerpo from "@/components/body";
+
 export default {
   name: "home",
   components: {Cuerpo,},
@@ -17,16 +22,23 @@ export default {
     checkLogin(){
       var id = localStorage.getItem('USER_ID').trim();
       if (id == null || id == ''){
-        this.isLogged = false;
+        this.isLogged = false
+
+
+
       }
       else{
         this.isLogged = true;
       }
     }
+
+
   },
   data() {
     return {
       isLogged: false
+
+
     }
   }
 }

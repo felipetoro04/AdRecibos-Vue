@@ -3,7 +3,7 @@
   <nav>
     <ul>
       <li><router-link to="/home"><button>Inicio</button></router-link> </li>
-      <li><router-link to="/home"><button @click="mostrarCreacionBoleta">Creación de Boletas</button></router-link></li>
+      <li><router-link to="/home"><button @click="mostrarCreacionBoleta()">Creación de Boletas</button></router-link></li>
       <li><router-link to="/Consultas"><button>Consultas</button></router-link></li>
       <li><router-link to="/Configuraciones"><button>Configuración</button></router-link></li>
       <li><button @click="logout()">Cerrar Sesión</button></li>
@@ -35,7 +35,7 @@ name: "barnav",
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: "arial", serif;
+  font-family:'Quicksand', sans-serif;
   text-align: center;
 
 }
@@ -46,7 +46,7 @@ name: "barnav",
   font-size: 10px;
 
   position: relative;
-  background-color: mediumslateblue;
+  background-image: url("https://www.dhresource.com/0x0/f2/albu/g9/M01/CA/F4/rBVaWF6MElqAfa4CAACDx132CXw700.jpg/blue-wallpapers-simple-modern-abstract-3d.jpg");
   border: none;
   color: #fff;
   padding: 20px;

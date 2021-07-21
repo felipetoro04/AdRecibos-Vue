@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div id="setting">
     <barnav></barnav>
     <div id="vertical">
       <ul id="subnav" class="metro-nav metro-nav-vertical">
@@ -14,25 +14,25 @@
           <h1>Modificar datos usuario</h1>
           <p>Modificar datos de usuario y para guadar cambios presione boton "Guardar"</p>
 
-          <label><b>Nombre</b></label>
-          <input v-model="user.name" type="text" placeholder="Ingresa tu nombre completo" required>
+          <label><b>Nombre</b></label><br>
+          <input v-model="user.name" type="text" placeholder="Ingresa tu nombre completo" required><br>
 
           <label><b>Selecccione Sexo</b></label><br>
-          <select v-model="user.idTypeSex" required>
+          <select v-model="user.idTypeSex" required><br>
             <option v-for="typeSex in tipeSexs" v-bind:key="typeSex.id" v-bind:value="typeSex.id">{{
                 typeSex.name
               }}
-            </option>
+            </option><br>
           </select><br>
 
           <label><b>Edad</b></label><br>
           <input v-model="user.age" type="number" placeholder="Ingresa edad" required><br>
           <hr>
-          <label><b>Correo Electronico</b></label>
-          <input v-model="user.email" type="text" placeholder="Ingresa Corre Electronico" required>
+          <label><b>Correo Electronico</b></label><br>
+          <input v-model="user.email" type="text" placeholder="Ingresa Corre Electronico" required><br>
 
-          <label><b>Password</b></label>
-          <input v-model="user.password" type="password" placeholder="Ingresa Password" required>
+          <label><b>Password</b></label><br>
+          <input v-model="user.password" type="password" placeholder="Ingresa Password" required><br>
 
           <button type="submit" class="signupbtn">Guardar</button>
         </div>
@@ -41,11 +41,11 @@
     <div id="eliminar" v-show="mostrarEliminar">
       <h1>Eliminar cuenta usuario</h1>
       <p>Para eliminar usuario ingrese el dato solicitado y persione boton "Eliminar"</p>
-      <label><b>Para eliminar usuario ingrese Contrasenia</b></label>
-      <input v-model="password" type="password" placeholder="Ingrese Contrasenia" name="psw-repeat" required>
-      <button type="submit" @click="OcultarEliminar()"  class="cancelbtn">Cancelar</button>
+      <label><b>Para eliminar usuario ingrese contraseña</b></label><br>
+      <input v-model="password" type="password" placeholder="Ingrese contraseña" name="psw-repeat" required><br>
+      <button type="submit" @click="OcultarEliminar()"  class="cancelbtn">Cancelar</button><br>
 
-      <button type="submit" @click="deleteUser()">Eliminar</button>
+      <button class="deletebtn" type="submit" @click="deleteUser()">Eliminar</button>
 
 
     </div>
@@ -149,7 +149,9 @@ export default {
 
 <style scoped>
 
-
+#setting{
+  font-family:'Quicksand', sans-serif;
+}
 .metro-nav {
   box-shadow: 0 5px 15px #193047;
   list-style: none;
@@ -157,7 +159,7 @@ export default {
   margin: 0;
   float: left;
   text-transform: uppercase;
-  font-family: "arial", serif;
+
   font-size: 10px;
 
 }
@@ -222,43 +224,83 @@ export default {
 
 /* Modificar*/
 #modificar {
-  font-family: "arial", serif;
+
+
   text-align: center;
   padding-left: 250px;
 
 }
+#eliminar {
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
+
+  text-align: center;
+  padding-left: 250px;
+
+}
+#modificar input{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
+text-align: center;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 7px 10px;
+  height: 20px;
+  outline: 0;
+  width: 200px;
+  background: #f0f0f0;  
+  border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
 
-select {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
+}
+#eliminar input{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   display: inline-block;
-  border: none;
-  background: #f1f1f1;
+  text-align: center;
+  cursor: pointer;
+  padding: 7px 10px;
+  height: 40px;
+  outline: 0;
+  width: 200px;
+  background: #f0f0f0;
+  border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+
+}
+#modificar select{
+  appearance: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  padding: 7px 10px;
+  height: 40px;
+  outline: 0;
+  width: 200px;
+  background: #f0f0f0;
+  border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+
+
 }
 
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-/* Set a style for all buttons */
 button {
-  background-color: mediumslateblue;
+
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -279,10 +321,18 @@ button:hover {
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
+.deletebtn , .signupbtn{
+  background-image: url("https://www.dhresource.com/0x0/f2/albu/g9/M01/CA/F4/rBVaWF6MElqAfa4CAACDx132CXw700.jpg/blue-wallpapers-simple-modern-abstract-3d.jpg");
   width: 15%;
-
+  border-radius: 30px;
 }
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+  border-radius: 30px;
+}
+
+
 
 /* Add padding to container elements */
 .container {
@@ -290,9 +340,10 @@ button:hover {
 }
 
 #eliminar {
-  font-family: "arial", serif;
+  margin-top:20px ;
+  margin-bottom: 20px;
   text-align: center;
-  padding-left: 250px;
+
 
 }
 
