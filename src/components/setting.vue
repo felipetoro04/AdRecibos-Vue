@@ -56,6 +56,7 @@
 
 import axios from "axios";
 import Barnav from "@/components/barnav";
+import loginMixin from "@/mixins/login-mixins";
 
 export default {
   name: "setting",
@@ -63,6 +64,9 @@ export default {
 
 
   el: '#vertical',
+  mixins:[loginMixin],
+  beforeCreate() {
+  },
   data() {
     return {
       password: null,
@@ -92,6 +96,7 @@ export default {
         }],
     };
   },
+
   methods: {
     mostrarModificarVerdadero() {
       this.mostrarModificar = true,

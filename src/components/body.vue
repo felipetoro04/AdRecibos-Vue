@@ -2,7 +2,7 @@
   <div id="central">
     <barnav v-on:creacion="showCreation"/>
     <div  class="welcome">
-      Bienvenido : {{userEmail}}
+      <b>Bienvenido : {{userEmail}}</b>
     </div>
     <div id='Cuerpo' align="center">
       <Header></Header>
@@ -29,9 +29,12 @@
               </select>
               <button class="button-add" @click="addReceipt">Agregar</button>
               <button class="button-clean" @click="clean()">Limpiar</button>
-              <button class="button-clean" @click="hideCreation">Cancelar</button>
+              <button class="button-cancel" @click="hideCreation">Cancelar</button>
 
             </form>
+          </div>
+          <div>
+            <input type="text" placeholder="Buscar" class="form-control "  style="width:300px;" v-model="searchQuery">
           </div>
           <div class="content-table">
             <table class="blueTable" >
@@ -45,9 +48,10 @@
                 <th>Acciones</th>
 
               </tr>
-              <tr v-for="receipt in receipts" :key="receipt.id">
+              <tr v-for="receipt in resultQuery" :key="receipt.id">
                 <td>
-                  {{ obtainEnterprice(receipt.idEnterprice) }}
+
+                  {{receipt.enterprise ? receipt.enterprise.bussinessName : 'No definido'}}
                 </td>
                 <td>
                   {{ receipt.numberReceipt }}
@@ -62,7 +66,8 @@
                   {{ receipt.amountPayable | formatNumber}}
                 </td>
                 <td>
-                  {{obtainStatus(receipt.idStatus) }}
+
+                  {{receipt.status ? receipt.status.description : 'No definido'}}
 
                 </td>
                 <td>
@@ -95,11 +100,15 @@ var numeral = require("numeral");
 Vue.filter("formatNumber", function (value) {
   return numeral(value).format("1,0");
 });
+
+
+
 export default {
   name: "Cuerpo",
   components: {Barnav},
   data() {
     return {
+      searchQuery: null,
       showCR: false,
       receipts: null,
       hasError: false,
@@ -113,19 +122,20 @@ export default {
         idStatus: null,
         idUser: 1
       },
+
       userEmail: null,
       enterprices: [
         {
           id: 1,
-          name: "falabella"
+          name: "Falabella"
         },
         {
           id: 2,
-          name: "paris"
+          name: "Paris"
         },
         {
           id: 3,
-          name: "ripley"
+          name: "Ripley"
         }],
       status: [
         {
@@ -139,6 +149,23 @@ export default {
       creation: true
     };
   },
+
+  computed: {
+    resultQuery(){
+      if(this.searchQuery){
+        console.log(this.searchQuery)
+        return this.receipts.filter((item)=>{
+          return this.searchQuery.toLowerCase().split(' ').every(v => item.enterprise.bussinessName.toLowerCase().includes(v)) ||
+              this.searchQuery.toLowerCase().split(' ').every(v => item.numberReceipt.toLowerCase().includes(v)) ||
+              this.searchQuery.toLowerCase().split(' ').every(v => item.status.description.toLowerCase().includes(v))
+
+        })
+      }else{
+        return this.receipts;
+      }
+    }
+  },
+
   methods: {
     hideCreation() {
       this.showCR = false
@@ -214,6 +241,9 @@ export default {
         .finally(() => this.loading = false)
     this.userEmail = localStorage.getItem('USER_EMAIL')
   }
+
+
+
 }
 </script>
 

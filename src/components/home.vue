@@ -1,46 +1,19 @@
 <template>
   <div id="home">
-    <div v-if="isLogged">
+    <div>
       <Cuerpo></Cuerpo>
     </div>
-    <div v-else>
-      <router-link to="/login">A login</router-link>
-    </div>
-
   </div>
 </template>
 <script>
 import Cuerpo from "@/components/body";
+import loginMixin from "@/mixins/login-mixins";
 
 export default {
   name: "home",
   components: {Cuerpo,},
-  mounted() {
-    this.checkLogin()
-  },
-  methods:{
-    checkLogin(){
-      var id = localStorage.getItem('USER_ID').trim();
-      if (id == null || id == ''){
-        this.isLogged = false
+  mixins:[loginMixin],
 
-
-
-      }
-      else{
-        this.isLogged = true;
-      }
-    }
-
-
-  },
-  data() {
-    return {
-      isLogged: false
-
-
-    }
-  }
 }
 </script>
 
