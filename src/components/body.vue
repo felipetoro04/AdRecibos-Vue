@@ -35,7 +35,7 @@
           </div>
           <div class="search-box">
             <button class="btn-search"><font-awesome-icon icon="search"/></button>
-            <input type="text" class="input-search" placeholder="Buscar Institución, Estado, Nro Boleta, Fecha" v-model="searchQuery">
+            <input type="text" class="input-search" placeholder="Buscar Institución, Estado, Nro Boleta" v-model="searchQuery">
           </div>
           <div class="content-table">
             <table class="blueTable" >
@@ -260,7 +260,7 @@ export default {
   margin-left: 400px;
   margin-right: 400px;
 
-  background-image: url("https://image.freepik.com/vector-gratis/fondo-hexagonal-minimo-blanco_79603-1463.jpg");
+  background-image: url("https://cdn.pixabay.com/photo/2014/04/14/20/11/pink-324175_960_720.jpg");
   border: 2px solid #ccc;
 
  
@@ -411,10 +411,41 @@ margin-bottom: 20px;
   margin-bottom: 5px;
 }
 .button-update{
-  margin-right: 5px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 50px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-image: url("https://www.dhresource.com/0x0/f2/albu/g9/M01/CA/F4/rBVaWF6MElqAfa4CAACDx132CXw700.jpg/blue-wallpapers-simple-modern-abstract-3d.jpg");
+  color: white;
+
 }
+.button-update:hover {
+  opacity: 0.8;
+}
+.button-delete:hover {
+  opacity: 0.8;
+}
+
 .button-delete{
-  margin-right: 5px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 50px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: #f44336;
+  color: white;
+  margin-left: 40px;
+
+
 }
 
 .search-box{
@@ -458,6 +489,9 @@ margin-bottom: 20px;
   color:#ffffff ;
   background-color:transparent;
   pointer-events: painted;
+}
+.button-cancel{
+  margin-bottom: 20px;
 }
 .btn-search:focus ~ .input-search{
   width: 400px;

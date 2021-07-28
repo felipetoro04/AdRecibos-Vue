@@ -42,8 +42,8 @@
     <div id="eliminar" v-show="mostrarEliminar">
       <h1>Eliminar cuenta usuario</h1>
       <p>Para eliminar usuario ingrese el dato solicitado y persione boton "Eliminar"</p>
-      <label><b>Para eliminar usuario ingrese Contrasenia</b></label>
-      <input v-model="password" type="password" placeholder="Ingrese Contrasenia" name="psw-repeat" required>
+      <label><b>Para eliminar usuario ingrese  Contraseña</b></label>
+      <input v-model="password" type="password" placeholder="Ingrese  Contraseña" name="psw-repeat" required>
       <button type="submit" @click="OcultarEliminar()"  class="cancelbtn">Cancelar</button>
 
       <button type="submit" @click="deleteUser()">Eliminar</button>
@@ -168,7 +168,7 @@ export default {
   margin: 0;
   float: left;
   text-transform: uppercase;
-  font-family: "arial", serif;
+  font-family:'Quicksand', sans-serif;
   font-size: 10px;
 
 }
@@ -233,9 +233,11 @@ export default {
 
 /* Modificar*/
 #modificar {
-  font-family: "arial", serif;
+  font-family:'Quicksand', sans-serif;
   text-align: center;
-  padding-left: 250px;
+  margin-left: 300px;
+  margin-right: 250px;
+  
 
 }
 
@@ -246,6 +248,7 @@ input[type=text], input[type=password] {
   display: inline-block;
   border: none;
   background: #f1f1f1;
+  border-radius: 30px;
 }
 
 select {
@@ -254,7 +257,8 @@ select {
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
-  background: #f1f1f1;
+  background: #f1f1f1;border-radius: 30px;
+
 }
 
 input[type=text]:focus, input[type=password]:focus {
@@ -300,10 +304,12 @@ button:hover {
   padding: 16px;
 }
 
-#eliminar {
-  font-family: "arial", serif;
+#eliminar, input {
+  font-family:'Quicksand', sans-serif;
   text-align: center;
-  padding-left: 250px;
+  margin-left: 300px;
+  margin-right: 250px;
+
 
 }
 
