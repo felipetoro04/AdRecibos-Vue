@@ -8,6 +8,7 @@ import home from './components/home.vue';
 import registerUser from "@/components/registerUser";
 import inquiries from "@/components/inquiries";
 import setting from "@/components/setting";
+require('./plugins/fontawesome');
 
 
 Vue.config.productionTip = false

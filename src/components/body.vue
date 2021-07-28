@@ -33,8 +33,9 @@
 
             </form>
           </div>
-          <div>
-            <input type="text" placeholder="Buscar" class="form-control "  style="width:300px;" v-model="searchQuery">
+          <div class="search-box">
+            <button class="btn-search"><font-awesome-icon icon="search"/></button>
+            <input type="text" class="input-search" placeholder="Buscar Institución, Estado, Nro Boleta, Fecha" v-model="searchQuery">
           </div>
           <div class="content-table">
             <table class="blueTable" >
@@ -415,4 +416,62 @@ margin-bottom: 20px;
 .button-delete{
   margin-right: 5px;
 }
+
+.search-box{
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+
+}
+.input-search{
+  height: 30px;
+  width: 0px;
+  border-style: none;
+  padding: 10px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  outline: none;
+  border-radius: 25px;
+  transition: all .5s ease-in-out;
+  background-color: #22a6b3;
+  padding-right: 40px;
+  color:#fff;
+}
+.input-search::placeholder{
+  color:rgba(255,255,255,.5);
+  font-size: 15px;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+.btn-search{
+  margin-top: 10px;
+  width: 50px;
+  height: 30px;
+  border-style: none;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  right: 0px;
+  color:#ffffff ;
+  background-color:transparent;
+  pointer-events: painted;
+}
+.btn-search:focus ~ .input-search{
+  width: 400px;
+  border-radius: 12px;
+  background-color: #0373C1;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+.input-search:focus{
+  width: 400px;
+  border-radius: 12px;
+  background-color: #0373C1;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
 </style>
